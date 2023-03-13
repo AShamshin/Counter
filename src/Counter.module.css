@@ -1,0 +1,100 @@
+.counter {
+  width: 750px;
+  height: 400px;
+  margin: 0 auto;
+  padding-top: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.counterLeft {
+  width: 330px;
+  height: 300px;
+
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 3px solid aqua;
+}
+
+.counterRight {
+  width: 330px;
+  height: 300px;
+
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 3px solid aqua;
+}
+.counterTop {
+  width: 300px;
+  height: 160px;
+
+  border-radius: 10px;
+  border: 3px solid aqua;
+}
+.counterBottom {
+  width: 300px;
+  height: 100px;
+  border: 3px solid aqua;
+  border-radius: 10px;
+}
+.counterRight .counterTop {
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  font-weight: 700;
+  display: flex;
+}
+.counterRight .counterBottom button {
+  font-size: 40px;
+  font-weight: 700;
+  background-color: aqua;
+  border-radius: 10px;
+  border: none;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.counterRight .counterBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.counterLeft .counterBottom button {
+  font-size: 40px;
+  font-weight: 700;
+  background-color: aqua;
+  border-radius: 10px;
+  border: none;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.counterLeft .counterBottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.counterLeft .counterTop {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: space-evenly;
+  font-size: 25px;
+  font-weight: 700;
+}
+input {
+  width: 100px;
+  height: 25px;
+  margin-left: 30px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: 700;
+  border: 3px solid aqua;
+}
