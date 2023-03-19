@@ -11,6 +11,7 @@ export const Counter = (props: CounterPropsType) => {
   let [maxValue, setMaxValue] = useState(5);
   let [startValue, setStartValue] = useState(0);
   let [maxValueCounter, setMaxValueCounter] = useState(maxValue);
+  let a = true;
 
   let set = props.value;
 
@@ -31,6 +32,7 @@ export const Counter = (props: CounterPropsType) => {
 
   const maxChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     maxValue = +e.currentTarget.value;
+    a = false;
     setMaxValue(maxValue);
   };
 
@@ -38,8 +40,9 @@ export const Counter = (props: CounterPropsType) => {
     startValue = +e.currentTarget.value;
 
     setStartValue(startValue);
+    a = false;
   };
-
+  console.log(a);
   return (
     <div className={s.counter}>
       <div className={s.counterLeft}>
@@ -59,7 +62,7 @@ export const Counter = (props: CounterPropsType) => {
         </div>
         <div className={s.counterBottom}>
           <span>
-            <Button name={'set'} callback={setHandler} />
+            <Button name={'set'} callback={setHandler} disabled={a} />
           </span>
         </div>
       </div>
@@ -72,10 +75,12 @@ export const Counter = (props: CounterPropsType) => {
           {props.value}
         </div>
         <div className={s.counterBottom}>
-          <span
-            className={set < maxValueCounter ? s.aaa : s.errorCounterBottom}
-          >
-            <Button name={'inc'} callback={incHandler} />
+          <span className={set < maxValueCounter ? s.aaa : s.disabled}>
+            <Button
+              name={'inc'}
+              callback={incHandler}
+              disabled={set >= maxValueCounter}
+            />
           </span>
           <span className={s.aaa}>
             <Button name={'reset'} callback={resetHandler} />

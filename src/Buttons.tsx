@@ -1,6 +1,7 @@
 type ButtonPropsType = {
   name: string;
   callback: () => void;
+  disabled?: boolean;
 };
 
 export const Button = (props: ButtonPropsType) => {
@@ -10,7 +11,9 @@ export const Button = (props: ButtonPropsType) => {
 
   return (
     <>
-      <button onClick={onClickHandler}>{props.name}</button>
+      <button disabled={props.disabled} onClick={onClickHandler}>
+        {props.name}
+      </button>
     </>
   );
 };
