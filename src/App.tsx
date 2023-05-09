@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-
+import { Provider } from 'react-redux';
 import './App.css';
 import { Counter } from './Counter';
+import { CounterRedux } from './CounterRedux';
+
+import { store } from './store';
 
 function App() {
-  const [value, setValue] = useState(0);
-
   return (
     <div className='App'>
-      <Counter value={value} setValue={setValue} />
+      <Provider store={store}>
+        <CounterRedux />
+        {/* <Counter /> */}
+      </Provider>
     </div>
   );
 }

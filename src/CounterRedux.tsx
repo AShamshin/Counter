@@ -1,15 +1,23 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from './Buttons';
 import s from './Counter.module.css';
 
-export const Counter = () => {
-  const [value, setValue] = useState(0);
-  let [maxValue, setMaxValue] = useState(5);
-  let [startValue, setStartValue] = useState(0);
-  let [maxValueCounter, setMaxValueCounter] = useState(maxValue);
-  let [disabled, setDisabled] = useState(true);
+import {
+  incAC,
+  maxChangeAC,
+  resetAC,
+  setAC,
+  startChangeAC,
+} from './reducerValue';
+import { AppRootState } from './store';
 
-  // let set = value;
+export const CounterRedux = () => {
+  const dispatch = useDispatch();
+  const { value, maxValue, startValue, disabled } = useSelector<
+    AppRootState,
+    any
+  >((state) => state.value);
 
   // useEffect(() => {
   //   let startV = localStorage.getItem('startV');
@@ -26,36 +34,31 @@ export const Counter = () => {
   // }, []);
 
   const setHandler = () => {
-    setMaxValueCounter(maxValue);
-    setStartValue(startValue);
-    setValue(startValue);
-    setDisabled(true);
+    dispatch(setAC());
+
+    // setDisabled(true);
     // localStorage.setItem('maxV', JSON.stringify(maxValue));
     // localStorage.setItem('startV', JSON.stringify(startValue));
   };
 
   const incHandler = () => {
-    if (value < maxValueCounter) {
-      setValue(value + 1);
+    if (value < maxValue) {
+      dispatch(incAC());
     }
   };
 
   const resetHandler = () => {
-    setValue(+startValue);
+    dispatch(resetAC());
   };
 
   const maxChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    maxValue = +e.currentTarget.value;
-    setMaxValue(maxValue);
-
-    setDisabled(false);
+    let maxValue = +e.currentTarget.value;
+    dispatch(maxChangeAC(maxValue));
   };
 
   const startChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    startValue = +e.currentTarget.value;
-    setStartValue(startValue);
-
-    setDisabled(false);
+    let startValue = +e.currentTarget.value;
+    dispatch(startChangeAC(startValue));
   };
 
   return (
@@ -98,10 +101,10 @@ export const Counter = () => {
       <div className={s.counterRight}>
         {startValue < 0 || maxValue <= startValue ? (
           <div className={s.counterTopRight3}>incorrect value</div>
-        ) : maxValue >= startValue ? (
+        ) : disabled ? (
           <div
             className={
-              value < maxValueCounter ? s.counterTopRight1 : s.counterTopError
+              value < maxValue ? s.counterTopRight1 : s.counterTopError
             }
           >
             {value}
@@ -115,7 +118,7 @@ export const Counter = () => {
             <Button
               name={'inc'}
               callback={incHandler}
-              disabled={value >= maxValueCounter || !disabled}
+              disabled={value >= maxValue || !disabled}
             />
           </span>
           <span className={s.aaa}>
